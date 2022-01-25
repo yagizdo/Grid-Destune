@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:grid_todo/Models/category.dart';
+import 'package:grid_todo/Screens/categorypage.dart';
 
 class CategoryCard extends StatelessWidget {
-  const CategoryCard({Key? key}) : super(key: key);
+  const CategoryCard({Key? key, required this.category}) : super(key: key);
 
+  final Category category;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        showModalBottomSheet(context: context, builder: (context) => CategoryPage(title: category.title));
         print('Grid Card Clicked');
       },
       child: Card(
@@ -19,18 +23,14 @@ class CategoryCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children:  [
            Column(
-             children: const [
+             children: [
                Padding(
-                 padding: EdgeInsets.only(top : 20.0,left : 25.0),
-                 child: Text('Home',style: TextStyle(fontSize: 30,color: Colors.purple,fontWeight: FontWeight.bold),),
+                 padding: const EdgeInsets.only(top : 20.0,left : 25.0),
+                 child: Text(category.title,style: TextStyle(fontSize: 30,color: Colors.purple,fontWeight: FontWeight.bold),),
                ),
-               Text('To-Do(0)'),
+               const Text('To-Do(0)'),
              ],
            ),
-            Padding(
-              padding: const EdgeInsets.only(left : 200.0),
-              child: const Icon(Icons.home),
-            )
           ],
         ),
       ),
