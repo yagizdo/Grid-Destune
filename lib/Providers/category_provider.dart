@@ -13,4 +13,9 @@ List<Category> categories = [
 ];
 
 UnmodifiableListView<Category> get allCategories => UnmodifiableListView(categories);
+
+void addCategory(Category category) {
+  categories.add(category);
+  notifyListeners();
+}
 }
