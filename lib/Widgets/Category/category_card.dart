@@ -40,9 +40,26 @@ class CategoryCard extends StatelessWidget {
                  ),
                  Consumer<CategoryProvider>(
                    builder: (context, state,child) {
-                     return IconButton(icon: Icon(Icons.delete_forever,),
+                     return IconButton(icon: Icon(Icons.delete_forever,color : Colors.red),
                      onPressed: () {
-                       state.removeCategory(category);
+                       showDialog(
+                           context: context,
+                           builder: (context) {
+                             return AlertDialog(
+                               title: Text('Are you sure?'),
+                               content: const Text('You do realize that incomplete todos will also be deleted, right?'),
+                               actions: [
+                                 ElevatedButton(onPressed: () {
+                                   state.removeCategory(category);
+                                   Navigator.pop(context);
+                                 }, child: Text('I am sure'),style: ElevatedButton.styleFrom(primary: Colors.red),),
+                                 TextButton(onPressed: () {
+                                   Navigator.pop(context);
+                                 }, child: Text('Cancel'))
+                               ],
+                             );
+                           }
+                       );
                      },
                      );
                    }
