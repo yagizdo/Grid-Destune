@@ -34,6 +34,7 @@ Run App
 
 - [ ] Splash Screen
 - [ ] Loading control
+- [ ] Todo List size bug fix
 
 
 ##  Libraries I use in the application:

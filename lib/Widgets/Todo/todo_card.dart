@@ -14,18 +14,27 @@ class TodoCard extends StatelessWidget {
       child: SizedBox(
         height: MediaQuery.of(context).size.height / 9,
         child: Card(
+          elevation: 0,
+          color: Colors.purple[300],
           child: Column(
             children: [
               Consumer<TodoProvider>(
                 builder: (context, state,child) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(todo.title),
-                      IconButton(icon : Icon(Icons.delete_forever),onPressed: () {
-                        state.removeTodo(todo);
-                      },)
-                    ],
+                  return Padding(
+                    padding: const EdgeInsets.only(left : 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          children: [
+                            Text(todo.title,style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.bold),),
+                          ],
+                        ),
+                        IconButton(icon : const Icon(Icons.delete_forever,color: Colors.white,),onPressed: () {
+                          state.removeTodo(todo);
+                        },)
+                      ],
+                    ),
                   );
                 }
               )

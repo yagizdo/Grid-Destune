@@ -12,7 +12,7 @@ class TodoProvider extends ChangeNotifier {
   var todos = <Todo>[];
 
   UnmodifiableListView<Todo> get allTodos =>
-      UnmodifiableListView(todos);
+      UnmodifiableListView(todos.reversed);
 
   void addTodo(Todo todo) {
     todos.add(todo);
