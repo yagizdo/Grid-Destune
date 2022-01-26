@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:grid_todo/Models/category.dart';
+import 'package:grid_todo/Providers/category_provider.dart';
+import 'package:grid_todo/Providers/todo_provider.dart';
 import 'package:grid_todo/Screens/categorypage.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:provider/provider.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({Key? key, required this.category}) : super(key: key);
@@ -30,7 +33,20 @@ class CategoryCard extends StatelessWidget {
                crossAxisAlignment: CrossAxisAlignment.start,
                children: [
                  Text(category.title,style: TextStyle(fontSize: 30,color: Colors.purple,fontWeight: FontWeight.bold),),
-                 const Text('To-Do(0)'),
+                 Consumer<TodoProvider>(
+                   builder: (context, state,child) {
+                     return Text('To-Do(${state.allTodos.where((Todo) => Todo.category.contains(category.title)).length})');
+                   }
+                 ),
+                 Consumer<CategoryProvider>(
+                   builder: (context, state,child) {
+                     return IconButton(icon: Icon(Icons.delete_forever,),
+                     onPressed: () {
+                       state.removeCategory(category);
+                     },
+                     );
+                   }
+                 )
                ],
              ),
             ],

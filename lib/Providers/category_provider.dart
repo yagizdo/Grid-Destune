@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:grid_todo/Models/category.dart';
 import 'package:grid_todo/Providers/shared_preferences_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,8 +23,45 @@ class CategoryProvider extends ChangeNotifier {
   // Category Methods
   void addCategory(Category category) {
     categories.add(category);
-    updateCategoryToLocalStorage();
+    Fluttertoast.showToast(
+        msg: 'Added!',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+    saveCategoryToLocalStorage();
     notifyListeners();
+  }
+
+  void removeCategory(Category category) {
+    if(category.title.contains('Home') || category.title.contains('School') || category.title.contains('Personal') || category.title.contains('Work') || category.title.contains('Flutter')) {
+      Fluttertoast.showToast(
+          msg: 'You cannot delete the default categories!',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+    } else {
+      categories.remove(category);
+      Fluttertoast.showToast(
+          msg: 'Removed!',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Colors.green,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+      updateCategoryToLocalStorage();
+      notifyListeners();
+    }
+
   }
 
   // Shared Preferences Methods

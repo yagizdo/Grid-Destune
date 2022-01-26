@@ -18,7 +18,10 @@ class CategoryList extends StatelessWidget {
             ),
             itemCount: state.allCategories.length,
             itemBuilder: (context,index) {
-              return CategoryCard(category: state.allCategories[index],);
+              return Padding(
+                padding: const EdgeInsets.only(top : 20.0,right: 10.0),
+                child: CategoryCard(category: state.allCategories[index],),
+              );
             }
         );
       }

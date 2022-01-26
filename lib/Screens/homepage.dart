@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grid_todo/Models/category.dart';
 import 'package:grid_todo/Providers/category_provider.dart';
-import 'package:grid_todo/Widgets/Category/category_card.dart';
-import 'package:grid_todo/Widgets/Homepage/category_list.dart';
+import 'package:grid_todo/Widgets/Category/category_list.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -78,7 +77,7 @@ class _HomePageState extends State<HomePage> {
         },
         child: const Icon(Icons.add),
       ),
-      body: CategoryList(),
+      body: const CategoryList(),
     );
   }
 }
