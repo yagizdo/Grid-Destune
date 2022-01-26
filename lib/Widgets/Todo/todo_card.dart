@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:grid_todo/Models/todo.dart';
 
 class TodoCard extends StatelessWidget {
-  const TodoCard({Key? key}) : super(key: key);
+  TodoCard({Key? key,required this.todo}) : super(key: key);
 
+  Todo todo;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -12,7 +14,7 @@ class TodoCard extends StatelessWidget {
         child: Card(
           child: Column(
             children: [
-              Text('Test'),
+              Text(todo.title),
             ],
           ),
         ),
