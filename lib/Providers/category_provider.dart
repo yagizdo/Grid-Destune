@@ -37,7 +37,7 @@ class CategoryProvider extends ChangeNotifier {
   }
 
   void removeCategory(Category category) {
-    if(category.title.contains('Home') || category.title.contains('School') || category.title.contains('Personal') || category.title.contains('Work') || category.title.contains('Flutter')) {
+    if(category.title == ('Home') || category.title == ('School') || category.title == ('Personal') || category.title == ('Work') || category.title == ('Flutter')) {
       Fluttertoast.showToast(
           msg: 'You cannot delete the default categories!',
           toastLength: Toast.LENGTH_SHORT,
