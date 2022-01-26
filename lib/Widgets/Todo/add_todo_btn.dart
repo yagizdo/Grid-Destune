@@ -21,7 +21,7 @@ class AddTodoBTN extends StatelessWidget {
                   child: AlertDialog(
                     title: const Text('Add Todo'),
                     content: SizedBox(
-                      height: MediaQuery.of(context).size.height / 3.5,
+                      height: MediaQuery.of(context).size.height / 9,
                       child: Form(
                         key: formKey,
                         child: Column(
