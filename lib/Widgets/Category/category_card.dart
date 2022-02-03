@@ -12,64 +12,63 @@ class CategoryCard extends StatelessWidget {
   final Category category;
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        showMaterialModalBottomSheet(
-            context: context, builder: (context) => CategoryPage(title: category.title));
-        print('Grid Card Clicked');
-      },
-      child: Card(
-        elevation: 2,
-        color: Colors.grey[100],
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(top : 30.0, left : 30.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children:  [
-             Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
-               children: [
-                 Text(category.title,style: TextStyle(fontSize: 30,color: Colors.purple,fontWeight: FontWeight.bold),),
-                 Consumer<TodoProvider>(
-                   builder: (context, state,child) {
-                     return Text('To-Do(${state.allTodos.where((Todo) => Todo.category.contains(category.title)).length})');
-                   }
+    return Consumer<CategoryProvider>(
+        builder: (context,state,child) => GestureDetector(
+          onTap: () {
+            showMaterialModalBottomSheet(
+                context: context, builder: (context) => CategoryPage(title: category.title));
+            print('Grid Card Clicked');
+          },
+          onLongPress: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('Are you sure?'),
+                    content: const Text('You do realize that incomplete todos will also be deleted, right?'),
+                    actions: [
+                      ElevatedButton(onPressed: () {
+                        state.removeCategory(category);
+                        Navigator.pop(context);
+                      }, child: Text('I am sure'),style: ElevatedButton.styleFrom(primary: Colors.red),),
+                      TextButton(onPressed: () {
+                        Navigator.pop(context);
+                      }, child: Text('Cancel'))
+                    ],
+                  );
+                }
+            );
+          },
+          child: Card(
+            elevation: 2,
+            color: Colors.grey[100],
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(top : 30.0, left : 30.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children:  [
+                 Column(
+                   crossAxisAlignment: CrossAxisAlignment.start,
+                   children: [
+                     Text(category.title,style: TextStyle(fontSize: 30,color: Colors.purple,fontWeight: FontWeight.bold),),
+                     Consumer<TodoProvider>(
+                       builder: (context, state,child) {
+                         return Text('To-Do(${state.allTodos.where((Todo) => Todo.category.contains(category.title)).length})');
+                       }
+                     ),
+                   ],
                  ),
-                 Consumer<CategoryProvider>(
-                   builder: (context, state,child) {
-                     return IconButton(icon: Icon(Icons.delete_forever,color : Colors.red),
-                     onPressed: () {
-                       showDialog(
-                           context: context,
-                           builder: (context) {
-                             return AlertDialog(
-                               title: Text('Are you sure?'),
-                               content: const Text('You do realize that incomplete todos will also be deleted, right?'),
-                               actions: [
-                                 ElevatedButton(onPressed: () {
-                                   state.removeCategory(category);
-                                   Navigator.pop(context);
-                                 }, child: Text('I am sure'),style: ElevatedButton.styleFrom(primary: Colors.red),),
-                                 TextButton(onPressed: () {
-                                   Navigator.pop(context);
-                                 }, child: Text('Cancel'))
-                               ],
-                             );
-                           }
-                       );
-                     },
-                     );
-                   }
-                 )
-               ],
-             ),
-            ],
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
+        )
     );
+      }
   }
-}
+
+
+
