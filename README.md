@@ -43,7 +43,17 @@ Run App
 - Flutter Toast : https://pub.dev/packages/fluttertoast
 - Modal Bottom Sheet : https://pub.dev/packages/modal_bottom_sheet
 
-## Screenshots(Soon..)
+## Screenshots
+### Homepage
+<img align="left" width="300" height="600" src="Screenshots/homepage1.png">
+<img align="center" width="300" height="600" src="Screenshots/homepage2.png">
+
+### Add Category
+<img align="center" width="300" height="600" src="Screenshots/addcategory.png">
+
+### Todo Page
+<img align="center" width="300" height="600" src="Screenshots/todopage.png">
+
 
 ## Contributing
 
